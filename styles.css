@@ -10,6 +10,7 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--background);
   color: var(--text);
+  position: relative;
 }
 
 @keyframes fadeInDown {
@@ -61,16 +62,138 @@ body {
   }
 }
 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes moveBlob {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -50px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+  animation: moveBlob 15s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::after {
+  content: '📚 📖 ✏️  📐 🎓 📍 📚 📖 ✏️  📐 🎓 📍 📚 📖 ✏️  📐 🎓 📍 📚 📖 ✏️  📐 🎓 📍 📚 📖 ✏️  📐 🎓';
+  position: fixed;
+  font-size: 3rem;
+  opacity: 0.03;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  line-height: 2.5;
+  word-wrap: break-word;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+}
+
+.star {
+  position: fixed;
+  font-size: 100px;
+  opacity: 0.04;
+  top: 5%;
+  left: 10%;
+  animation: float 10s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Decoración adicional fondo */
+body {
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 92, 246, 0.01) 2px,
+      rgba(139, 92, 246, 0.01) 4px
+    ),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
 .header {
   align-items: center;
-  padding: 20px 40px;
+  padding: 25px 40px;
   text-align: center;
   animation: fadeInDown 0.6s ease-out;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border-bottom: 2px solid rgba(139, 92, 246, 0.1);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmerHeader 3s infinite;
+}
+
+@keyframes shimmerHeader {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .logo {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  padding: 0;
 }
 
 .hero {
@@ -83,6 +206,13 @@ body {
 .hero h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+  margin: 20px 0;
 }
 
 .hero p {
@@ -122,6 +252,15 @@ body {
 
 .tutoras h3 {
   animation: fadeInDown 0.6s ease-out;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
 }
 
 .cards {
@@ -131,24 +270,116 @@ body {
   flex-wrap: wrap;
 }
 
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
 .card {
   background: white;
   border-radius: 20px;
   padding: 25px;
   width: 260px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: transform .3s, box-shadow 0.3s;
   animation: fadeInUp 0.8s ease-out;
   animation-fill-mode: both;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .card:nth-child(1) { animation-delay: 0.1s; }
 .card:nth-child(2) { animation-delay: 0.2s; }
 .card:nth-child(3) { animation-delay: 0.3s; }
 
-.card:hover {
-  transform: translateY(-8px);
-  animation: glow 2s ease-in-out infinite;
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-front, .card-back {
+  width: 100%;
+  border-radius: 20px;
+  transition: opacity 0.4s ease, z-index 0.4s ease;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  opacity: 1;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.card-back {
+  opacity: 0;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.95), rgba(236, 72, 153, 0.95));
+  color: white;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.card:hover .card-front {
+  opacity: 0;
+  z-index: 0;
+}
+
+.card:hover .card-back {
+  opacity: 1;
+  z-index: 2;
+}
+
+.card-back h5 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+.card-back ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.card-back li {
+  padding-left: 15px;
+  position: relative;
+}
+
+.card-back li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  opacity: 0.95;
 }
 
 .card img {
@@ -213,6 +444,8 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 .tutora-container {
@@ -238,12 +471,34 @@ body {
   font-size: 2.5rem;
   margin: 20px 0 10px;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
 .tutora-info p {
   font-size: 1.1rem;
   margin: 10px 0;
   animation: fadeInUp 0.8s ease-out 0.3s backwards;
+  text-align: center;
+}
+
+.contact-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
 .tutora-description {
@@ -265,14 +520,14 @@ body {
   background: #25D366;
   color: white;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin: 30px auto 0 auto;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   animation: fadeInUp 0.8s ease-out 0.5s backwards;
   text-decoration: none;
@@ -288,6 +543,12 @@ body {
 .btn-whatsapp svg {
   width: 28px;
   height: 28px;
+}
+
+.whatsapp-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .back-btn {
@@ -350,6 +611,12 @@ body {
   .card {
     width: 100%;
     max-width: 300px;
+    min-height: 350px;
+  }
+
+  .card-back {
+    overflow-y: auto;
+    max-height: 100%;
   }
 
   .tutora-hero {
@@ -398,10 +665,10 @@ body {
   }
 
   .btn-whatsapp {
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     font-size: 1.6rem;
-    margin-top: 25px;
+    margin: 25px auto 0 auto;
   }
 }
 
@@ -452,6 +719,27 @@ body {
     max-width: 100%;
     padding: 20px;
     border-radius: 15px;
+    min-height: 300px;
+  }
+
+  .card-back {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+
+  .card-back h5 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+  }
+
+  .card-back ul {
+    font-size: 0.85rem;
+    margin: 0 0 12px 0;
+    line-height: 1.6;
+  }
+
+  .card-description {
+    font-size: 0.8rem;
   }
 
   .card:nth-child(1) { animation-delay: 0.05s; }
@@ -533,10 +821,10 @@ body {
   }
 
   .btn-whatsapp {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     font-size: 1.4rem;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
   }
 
   .btn-whatsapp:active {
@@ -582,8 +870,9 @@ body {
   }
 
   .btn-whatsapp {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     font-size: 1.3rem;
+    margin: 0 auto;
   }
 }
