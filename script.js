@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
+      // Si el click es en un botón o enlace, permitir el comportamiento por defecto
+      if (e.target.closest('button') || e.target.closest('a')) {
+        // Permitir que el click en el botón/enlace se propague normalmente
+        return;
+      }
+      
       e.preventDefault();
+      e.stopPropagation();
+      
       isFlipped = !isFlipped;
       
       const cardFront = this.querySelector('.card-front');
