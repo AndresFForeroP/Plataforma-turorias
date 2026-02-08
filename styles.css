@@ -459,6 +459,8 @@ body {
 .tutora-image {
   width: 100%;
   max-width: 400px;
+  aspect-ratio: 3/4;
+  object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2);
   margin: 20px auto;
@@ -643,6 +645,8 @@ body {
 
   .tutora-image {
     max-width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
     margin: 15px auto;
   }
 
@@ -794,7 +798,8 @@ body {
 
   .tutora-image {
     max-width: 100%;
-    max-height: 350px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
     margin: 15px auto;
     border-radius: 15px;
   }
